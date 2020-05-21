@@ -1,4 +1,4 @@
-package com.ArcadeGamePark.news;
+package com.example.news;
 
 import org.junit.Test;
 
