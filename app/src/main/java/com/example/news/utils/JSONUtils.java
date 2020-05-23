@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class JSONUtils {
     private static final String KEY_RESULTS = "results";
@@ -21,8 +22,8 @@ public class JSONUtils {
     public static final String BASE_POSTER_URL = "https://image.tmdb.org/t/p/";
     public static final String BIG_POSTER_SIZE = "w780";
 
-    public static ArrayList<News> getNewsFromJSON(JSONObject jsonObject){ //  we get array movies
-        ArrayList<News> result = new ArrayList<>();
+    public static List<News> getNewsFromJSON(JSONObject jsonObject){ //  we get array movies
+        List<News> result = new ArrayList<>();
         if(jsonObject == null){
             return result;
         }
@@ -44,5 +45,24 @@ public class JSONUtils {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static News getNewsFromJSONObject(JSONObject jsonObject) {
+        if (jsonObject == null) {
+            return null;
+        }
+        News news = null;
+        try {
+            int id = jsonObject.getInt(KEY_ID);
+            String title = jsonObject.getString(KEY_TITLE);
+            String overview = jsonObject.getString(KEY_OVERVIEW);
+            String posterPath = BASE_POSTER_URL + BIG_POSTER_SIZE + jsonObject.getString(KEY_POSTER_PATH);
+            String releaseDate = jsonObject.getString(KEY_RELEASE_DATE);
+            double voteAverage = jsonObject.getDouble(KEY_VOTE_AVERAGE);
+            news = new News(id, title, posterPath, overview, voteAverage, releaseDate);
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+        return news;
     }
 }

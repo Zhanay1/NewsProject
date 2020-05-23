@@ -1,7 +1,13 @@
 package com.example.news.db;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+import java.util.List;
+
+@Entity(tableName = "news")
 public class News {
+    @PrimaryKey
     private int id;
     private String title;
     private String bigPosterPath;
@@ -65,4 +71,5 @@ public class News {
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
+
 }
